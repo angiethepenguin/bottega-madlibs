@@ -28,7 +28,7 @@ class Card extends Component {
           "Plural Noun",
           this.state.pluralNoun,
           this.handleInputChange,
-          "pluralNoun"
+          "plural Noun"
         )}
       </div>
     );

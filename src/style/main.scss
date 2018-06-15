@@ -1,9 +1,64 @@
 .home {
+  position: relative;
   background-color: rgba(207, 207, 207, 0.06);
+  display: grid;
+
+  justify-items: center;
+  //align-items: center;
+  grid-template-rows: [reader-s] 218px [header-e card-s] minmax(736px, 994px) [card-e];
+}
+
+.header {
+  font-family: 'Montserrat';
+  text-align: center;
+  color: white;
+  align-self: center;
+
+  &__skew{
+    -webkit-clip-path: polygon(100% 0, 100% 25%, 0 50%, 0 0);
+    clip-path: polygon(100% 0, 100% 25%, 0 50%, 0 0);
+    z-index: -10;
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 110vh;
+    width: 100vw;
+    background-color: #444444;
+    
+  }
+
+  &__border{
+    -webkit-clip-path: polygon(100% 0, 100% 25%, 0 50%, 0 0);
+    clip-path: polygon(4% 0, 23% 25%, 0 50%, 0 0);
+    z-index: -10;
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 110vh;
+    width: 100vw;
+    background-color: #00CB79;
+    
+  }
+  h1 {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 44px;
+  }
+
+  p{
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 19px;
+    width: 403px;
+  }
+
+  
 }
 
 .card {
-  height: 736px;
+  min-height: 736px;
+  max-height: 994px;
   width: 1240px;
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.06);
   border-radius: 7px;
@@ -16,22 +71,29 @@
     display: grid;
     grid-template-rows: repeat(4, 1fr); //same as saying 1fr 4 times, just more clean.
     grid-template-columns: repeat(4, 1fr);
+
+    justify-items: center;
+    align-items: center;
   }
 }
 
 .input{
+  display: grid;
+  //grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: [number-s] 26px [number-e input-s] 1fr [input-e];
 
   &__title{
-
+    grid-column: input-s/input-e;
 
   }
 
   input{
+    grid-column: input-s/input-e;
 
   }
 
   &__number{
-
+    grid-column: number-s/number-e;
   }
 }
 

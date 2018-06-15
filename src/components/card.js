@@ -1,73 +1,93 @@
 import React, { Component } from "react";
 
 import Input from "./input";
+import Content from './content'
+
+const INITIAL_STATE = {
+  color: '',
+  pluralNoun: '',
+  adjectiveOne: '',
+  celebOne: '',
+  adjectiveTwo: '',
+  nounOne: '',
+  numberOne: '',
+  numberTwo: '',
+  nounTwo: '',
+  adjectiveThree: '',
+  celebTwo: '',
+  celebThree: '',
+  adjectiveFour: '',
+  nounThree: '',
+  celebFour: '',
+  adjectiveFive: '',
+  contentVisible: false
+}
 
 class Card extends Component {
   constructor() {
     super();
 
-    this.state = {
-      color: '',
-      pluralNoun: '',
-      adjectiveOne: '',
-      celebOne: '',
-      adjectiveTwo: '',
-      nounOne: '',
-      numberOne: '',
-      numberTwo: '',
-      nounTwo: '',
-      adjectiveThree: '',
-      celebTwo: '',
-      celebThree: '',
-      adjectiveFour: '',
-      nounThree: '',
-      celebFour: '',
-      adjectiveFive: '',
-    };
+    this.state = INITIAL_STATE;
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   handleInputChange(event) {
     this.setState({ [event.target.name]: event.target.value });
-    console.log(this.state);
   }
+
+  handleFormSubmit(event) {
+    event.preventDefault();
+
+    if (this.state.contentVisible) {
+      this.setState(INITIAL_STATE)
+    } else {
+      this.setState({ contentVisible: true })
+    }
+  }
+
 
   render() {
 
     const inputData = [
-      { title: 'color', this.state.color, name: 'color' },
-      { title: 'Plural Noun', this.state.pluralNoun, name: 'pluralNoun' },
-      { title: 'Adjective', this.state.adjectiveOne, name: 'adjectiveOne' },
-      { title: 'Celebrity', this.state.celebOne, name: 'celebOne' },
+      { title: 'Color', state: this.state.color, name: 'color' },
+      { title: 'Plural Noun', state: this.state.pluralNoun, name: 'pluralNoun' },
+      { title: 'Adjective', state: this.state.adjectiveOne, name: 'adjectiveOne' },
+      { title: 'Celebrity', state: this.state.celebOne, name: 'celebOne' },
 
-      { title: 'Adjective', this.state.adjectiveTwo, name: 'adjectiveTwo' },
-      { title: 'Noun', this.state.nounOne, name: 'nounOne' },
-      { title: 'Number', this.state.numberOne, name: 'numberOne' },
-      { title: 'Number', this.state.numberTwo, name: 'numberTwo' },
+      { title: 'Adjective', state: this.state.adjectiveTwo, name: 'adjectiveTwo' },
+      { title: 'Noun', state: this.state.nounOne, name: 'nounOne' },
+      { title: 'Number', state: this.state.numberOne, name: 'numberOne' },
+      { title: 'Number', state: this.state.numberTwo, name: 'numberTwo' },
 
-      { title: 'Noun', this.state.nounTwo, name: 'nounTwo' },
-      { title: 'Adjective', this.state.adjectiveThree, name: 'adjectiveThree' },
-      { title: 'Celebrity', this.state.celebTwo, name: 'celebTwo' },
-      { title: 'Celebrity', this.state.celebThree, name: 'celebThree' },
+      { title: 'Noun', state: this.state.nounTwo, name: 'nounTwo' },
+      { title: 'Adjective', state: this.state.adjectiveThree, name: 'adjectiveThree' },
+      { title: 'Celebrity', state: this.state.celebTwo, name: 'celebTwo' },
+      { title: 'Celebrity', state: this.state.celebThree, name: 'celebThree' },
 
-      { title: 'Adjective', this.state.adjectiveFour, name: 'adjectiveFour' },
-      { title: 'Noun', this.state.nounThree, name: 'nounThree' },
-      { title: 'Celebrity', this.state.celebFour, name: 'celebFour' },
-      { title: 'Adjective', this.state.adjectiveFive, name: 'adjectiveFive' },
+      { title: 'Adjective', state: this.state.adjectiveFour, name: 'adjectiveFour' },
+      { title: 'Noun', state: this.state.nounThree, name: 'nounThree' },
+      { title: 'Celebrity', state: this.state.celebFour, name: 'celebFour' },
+      { title: 'Adjective', state: this.state.adjectiveFive, name: 'adjectiveFive' }
     ]
 
 
     return (
-      <div className="card">
-        {
-          inputData.map(data => Input((data), this.handleInputChange))
-        }
-        <Content />
+      <form onSubmit={this.handleFormSubmit} className="card">
+        <div className="card__inputs">
+          {
+            inputData.map((data, index) => {
+              return Input((data), this.handleInputChange, index)
+            })
+        </div>
+            }
+          <button type="submit">{!this.state.contentVisible ? 'Generate Mad Lib' : 'Clear Form'}</button>
 
-      </div>
-    );
-  }
-}
-
-export default Card;
+          {
+            this.state.contentVisible ? <Content data={this.state} /> : ""
+      </form >
+        )
+      }
+    }
+    export default Card;

@@ -78,16 +78,18 @@ class Card extends Component {
         <div className="card__inputs">
           {
             inputData.map((data, index) => {
-              return Input((data), this.handleInputChange, index)
+              return Input((data), this.handleInputChange, index);
             })
+          }
         </div>
-            }
-          <button type="submit">{!this.state.contentVisible ? 'Generate Mad Lib' : 'Clear Form'}</button>
+        <button type="submit">{!this.state.contentVisible ? 'Generate Mad Lib' : 'Clear Form'}</button>
 
-          {
-            this.state.contentVisible ? <Content data={this.state} /> : ""
-      </form >
-        )
-      }
-    }
-    export default Card;
+        {
+          this.state.contentVisible ? <Content data={this.state} /> : ""
+        }
+      </form>
+    )
+  }
+}
+
+export default Card;
